@@ -12,3 +12,10 @@ export type OrderItem = {
   quantity: number;
   priceKopecks: number;
 };
+
+/** Текущий посетитель для шапки: вход по телефону или через Google. */
+export type Viewer = {
+  name: string;
+  image: string | null;
+  provider: "phone" | "google";
+};
