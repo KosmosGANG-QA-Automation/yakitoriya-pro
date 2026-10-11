@@ -1,8 +1,13 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 
-// AUTH_SECRET, AUTH_GOOGLE_ID и AUTH_GOOGLE_SECRET читаются из окружения.
 export const { handlers, auth } = NextAuth({
-  providers: [Google],
+  providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+  ],
+  secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: "jwt" },
 });

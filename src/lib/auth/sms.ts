@@ -11,7 +11,7 @@ export function generateCode(): string {
 }
 
 export function hashCode(phone: string, code: string): string {
-  return createHmac("sha256", requireEnv("AUTH_SECRET"))
+  return createHmac("sha256", (process.env.AUTH_SECRET ?? requireEnv("NEXTAUTH_SECRET")))
     .update(`${phone}:${code}`)
     .digest("hex");
 }
