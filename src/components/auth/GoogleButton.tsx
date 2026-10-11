@@ -2,12 +2,12 @@
 
 import { signIn } from "next-auth/react";
 
-export function GoogleButton() {
+export function GoogleButton({ redirectTo = "/" }: { redirectTo?: string }) {
   return (
     <button
       type="button"
-      onClick={() => signIn("google", { redirectTo: "/" })}
-      className="flex items-center justify-center gap-3 rounded-lg border border-neutral-300 bg-white px-4 py-3 font-medium text-neutral-700 shadow-sm transition hover:bg-neutral-50"
+      onClick={() => signIn("google", { redirectTo })}
+      className="flex items-center justify-center gap-3 rounded-full border border-line bg-white px-6 py-3.5 text-sm font-semibold text-neutral-700 shadow-sm transition hover:bg-neutral-50"
     >
       <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />

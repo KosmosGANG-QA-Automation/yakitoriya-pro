@@ -14,7 +14,7 @@ async function post(url: string, body: unknown) {
   return data;
 }
 
-export function AuthForm() {
+export function AuthForm({ redirectTo = "/" }: { redirectTo?: string }) {
   const router = useRouter();
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
@@ -32,6 +32,7 @@ export function AuthForm() {
         setStep("code");
       } else {
         await post("/api/auth/verify-code", { phone, code });
+        router.push(redirectTo);
         router.refresh();
       }
     } catch (err) {
@@ -42,7 +43,7 @@ export function AuthForm() {
   }
 
   return (
-    <form onSubmit={submit} className="flex w-full max-w-sm flex-col gap-3">
+    <form onSubmit={submit} className="flex w-full flex-col gap-3">
       {step === "phone" ? (
         <input
           type="tel"
@@ -50,7 +51,7 @@ export function AuthForm() {
           placeholder="+7 900 000-00-00"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="rounded-lg border border-neutral-300 px-4 py-3"
+          className="rounded-xl border border-line bg-cream px-4 py-3.5 outline-none focus:border-brand"
           required
         />
       ) : (
@@ -61,15 +62,12 @@ export function AuthForm() {
           placeholder="Код из СМС"
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          className="rounded-lg border border-neutral-300 px-4 py-3 tracking-widest"
+          className="rounded-xl border border-line bg-cream px-4 py-3.5 tracking-widest outline-none focus:border-brand"
           required
         />
       )}
       {error && <p className="text-sm text-red-600">{error}</p>}
-      <button
-        disabled={busy}
-        className="rounded-lg bg-red-600 px-4 py-3 font-medium text-white disabled:opacity-50"
-      >
+      <button disabled={busy} className="btn-primary">
         {step === "phone" ? "Получить код" : "Войти"}
       </button>
     </form>
