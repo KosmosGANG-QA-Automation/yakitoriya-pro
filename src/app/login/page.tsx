@@ -26,7 +26,22 @@ async function LoginCard({ searchParams }: { searchParams: Promise<{ next?: stri
   );
 }
 
+const IS_STATIC = process.env.NEXT_PUBLIC_STATIC === "1";
+
 export default function LoginPage({ searchParams }: PageProps<"/login">) {
+  if (IS_STATIC) {
+    return (
+      <div className="container-x grid min-h-[36rem] place-items-center py-16">
+        <div className="max-w-md rounded-[2rem] border border-line bg-paper p-10 text-center">
+          <p className="text-5xl">🔒</p>
+          <h1 className="mt-4 font-display text-3xl font-bold">Демо-версия</h1>
+          <p className="mt-3 text-muted">
+            Вход и оплата работают только в полной версии сайта с сервером. Здесь можно посмотреть дизайн и собрать корзину.
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="container-x grid min-h-[36rem] place-items-center py-16">
       <Suspense>

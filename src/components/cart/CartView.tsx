@@ -111,6 +111,10 @@ export function CartView({ signedIn }: { signedIn: boolean }) {
               {busy ? "Оформляем…" : "Оформить заказ"}
             </button>
           </>
+        ) : process.env.NEXT_PUBLIC_STATIC === "1" ? (
+          <p className="rounded-xl bg-cream px-4 py-3 text-sm text-muted">
+            Демо-версия: оформление заказа доступно только в полной версии сайта.
+          </p>
         ) : (
           <Link href="/login?next=/cart" className="btn-primary w-full">
             Войти, чтобы оформить заказ

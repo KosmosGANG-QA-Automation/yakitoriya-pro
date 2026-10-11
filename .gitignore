@@ -45,3 +45,5 @@ next-env.d.ts
 AGENTS.md
 CLAUDE.md
 .claude/
+out/
+.pages-stash/
