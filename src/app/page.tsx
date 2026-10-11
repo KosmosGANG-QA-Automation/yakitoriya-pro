@@ -15,13 +15,13 @@ async function getViewer(): Promise<{ viewer: Viewer | null; canOrder: boolean }
     const { name, email, image } = googleSession.user;
     return {
       viewer: { name: name ?? email ?? "Гость", image: image ?? null, provider: "google" },
-      canOrder: false,
+      canOrder: true,
     };
   }
   const user = await getCurrentUser();
   if (user) {
     return {
-      viewer: { name: user.name ?? user.phone, image: null, provider: "phone" },
+      viewer: { name: user.name ?? user.phone ?? "Гость", image: null, provider: "phone" },
       canOrder: true,
     };
   }

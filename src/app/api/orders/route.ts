@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/supabase/server";
-import { getCurrentUser } from "@/lib/auth/session";
+import { getOrderingUser } from "@/lib/auth/viewer";
 import { PRODUCTS_BY_ID } from "@/lib/catalog";
 import { createPayment } from "@/lib/yookassa/client";
 import type { OrderItem } from "@/types";
@@ -16,7 +16,7 @@ const schema = z.object({
 });
 
 export async function POST(req: Request) {
-  const user = await getCurrentUser();
+  const user = await getOrderingUser();
   if (!user) return NextResponse.json({ error: "Требуется авторизация" }, { status: 401 });
 
   const parsed = schema.safeParse(await req.json().catch(() => null));

@@ -71,7 +71,7 @@ export function MenuList({ canOrder }: { canOrder: boolean }) {
             disabled={!canOrder || busy || address.trim().length < 5}
             className="rounded-lg bg-red-600 px-4 py-3 font-medium text-white disabled:opacity-50"
           >
-            {canOrder ? `Оплатить ${formatPrice(total)}` : "Войдите, чтобы оформить заказ"}
+            {canOrder ? `Оформить заказ · ${formatPrice(total)}` : "Войдите, чтобы оформить заказ"}
           </button>
         </div>
       )}
