@@ -7,6 +7,7 @@ import type { User, Viewer } from "@/types";
 
 /** Кто сейчас на сайте: вход через Google или по телефону. Для шапки и страниц. */
 export async function getViewer(): Promise<Viewer | null> {
+  if (process.env.NEXT_PUBLIC_STATIC === "1") return null;
   await connection();
   const googleUser = (await auth())?.user;
   if (googleUser) {
